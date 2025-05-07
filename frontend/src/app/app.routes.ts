@@ -4,6 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { GestisciOrdiniAttesaComponent } from './pages/gestisci-ordini-attesa/gestisci-ordini-attesa.component';
 import {DashboardComponent} from './pages/dashboard/dashboard.component';
 import { GestioneMenuComponent } from './pages/gestione-menu/gestione-menu.component';
+import { ResocontoOrdiniComponent } from './pages/resoconto-ordini/resoconto-ordini.component';
 export const routes: Routes = [
     {
         path: '',
@@ -24,5 +25,9 @@ export const routes: Routes = [
     {
         path:"gestioneMenu",
         component: GestioneMenuComponent,
+    },
+    {
+        path: "resocontoOrdiniAccettati",
+        component:ResocontoOrdiniComponent
     }
 ];

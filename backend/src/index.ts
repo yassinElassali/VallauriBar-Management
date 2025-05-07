@@ -6,6 +6,9 @@ import { addOrdiniAccettati } from "../controllers/accettoOrdini";
 import { sendOrderAcceptedEmail } from "../controllers/sendEmailOrdineAccettato";
 import {sendEmailOrdineRifiutato } from "../controllers/sendEmailOrdineRifiutato";
 import { rifiutaOrdini } from "../controllers/rifiutaOrdini";
+import { getTuttiGliOrdiniAccettati } from "../controllers/resocontoOrdiniAccettati";
+import { get } from "http";
+
 dotenv.config();
 
 const app = express();
@@ -30,7 +33,7 @@ app.post ("/accettaOrdine", addOrdiniAccettati);
 app.post("/ordini/email-accettata", sendOrderAcceptedEmail);
 app.post("/ordini/email-rifiutata", sendEmailOrdineRifiutato);
 app.post("/rifiutaOrdine", rifiutaOrdini);
-
+app.get("/resocontoOrdiniAccettati",getTuttiGliOrdiniAccettati);
 app.listen(PORT, () => {
   console.log(`Server in ascolto sulla porta ${PORT}`);
 });

@@ -1,0 +1,22 @@
+<div class="dashboard-container">
+    <div class="menu-container">
+      <div class="menu-left">
+        <h2>Ordini Accettati</h2>
+        <div class="ordini-list">
+          <div class="ordine" *ngFor="let ordine of ordini">
+            <div class="dati-ordine">
+              <p><strong>Email:</strong> {{ ordine.email }}</p>
+              <p><strong>Data:</strong> {{ ordine.creatoIl | date: 'short' }}</p>
+              <ul>
+                <li *ngFor="let item of ordine.prodotti">
+                  {{ item.nome }} x{{ item.quantita }} - €{{ item.prezzo }}
+                </li>
+              </ul>
+            </div>
+            <button class="btn-stampa" (click)="stampaFattura(ordine)">Stampa fattura</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
