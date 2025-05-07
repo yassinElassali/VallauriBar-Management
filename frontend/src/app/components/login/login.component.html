@@ -1,0 +1,16 @@
+<div class="login-box">
+  <h2>Inserisci PIN</h2>
+  <form>
+    <div class="user-box">
+      <input type="password" [value]="pinDisplay" disabled />
+    </div>
+
+    <div class="keypad">
+      <button *ngFor="let n of numbers" type="button" (click)="addDigit(n)">
+        {{ n }}
+      </button>
+    </div>
+  </form>
+
+  <p class="help-text">Se hai dimenticato il PIN, contatta l'assistenza su <a href="mailto:barvallauri&#64;gmail.com">barvallauri&#64;gmail.com</a></p>
+</div>

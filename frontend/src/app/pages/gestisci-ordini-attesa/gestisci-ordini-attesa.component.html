@@ -1,0 +1,44 @@
+<div *ngIf="showPopup" class="popup-overlay" (mouseover)="popupMouseOver = true" (mouseout)="popupMouseOver = false">
+  <div class="popup-box" [ngClass]="{ 'error': isErrorPopup, 'success': !isErrorPopup }">
+    <p>{{ popupMessage }}</p>
+  </div>
+</div>
+
+<div class="orders-container">
+  <h2>Ordini in Attesa</h2>
+  <div class="orders-list">
+    <div class="order-item" *ngFor="let order of orders">
+      <div class="order-details">
+        <p><strong>Cliente:</strong> {{ order.email }}</p>
+        <p><strong>Stato:</strong> {{ order.stato }}</p>
+        <p><strong>Totale:</strong> €{{ order.totale }}</p>
+        <p><strong>Prodotti Ordinati:</strong></p>
+        <ul>
+          <li *ngFor="let item of order.cartItems">
+            {{ item.nome }} (x{{ item.quantita }}) - €{{ item.prezzo }}
+          </li>
+        </ul>
+
+        <div *ngIf="showResocontoPopup" class="popup-overlay">
+          <div class="popup-box">
+            <h3>Seleziona i prodotti disponibili</h3>
+            <ul>
+              <li *ngFor="let item of selectedOrder?.cartItems">
+                <label>
+                  <input type="checkbox" (change)="onCheckboxChange(item, $event)" [checked]="item.disponibile" />
+                  {{ item.nome }} (x{{ item.quantita }}) - €{{ item.prezzo }}
+                </label>
+              </li>
+            </ul>
+            <button (click)="inviaResoconto()">Invia Resoconto Prodotti</button>
+          </div>
+        </div>
+
+      </div>
+      <div class="order-actions">
+        <button class="accept-btn" (click)="acceptOrder(order)">Accetta</button>
+        <button class="reject-btn" (click)="rejectOrder(order)">Rifiuta</button>
+      </div>
+    </div>
+  </div>
+</div>
