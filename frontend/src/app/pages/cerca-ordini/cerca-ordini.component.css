@@ -1,0 +1,97 @@
+.search-container {
+  max-width: 600px;
+  margin: 50px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.search-input {
+  width: 80%;
+  padding: 10px;
+  border: 2px solid #4a90e2;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.search-button {
+  background-color: #4a90e2;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.search-button:hover {
+  background-color: #357ab8;
+}
+
+.results {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.results ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.no-results {
+  margin-top: 20px;
+  color: #ff4d4d;
+  font-weight: bold;
+}
+.ordine-card {
+  background-color: #f8faff;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  border-left: 6px solid #4a90e2;
+  animation: fadeInUp 0.5s ease;
+}
+
+.ordine-card h3 {
+  color: #4a90e2;
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+.ordine-card p {
+  margin: 6px 0;
+  font-size: 16px;
+}
+
+.ordine-card ul {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.ordine-card li {
+  margin-bottom: 6px;
+  font-size: 15px;
+  color: #333;
+}
+
+.ordine-card .qty {
+  color: #4a90e2;
+  font-weight: bold;
+  margin-left: 6px;
+}
+
+/* Optional animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

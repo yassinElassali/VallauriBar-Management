@@ -7,7 +7,12 @@ import { sendOrderAcceptedEmail } from "../controllers/sendEmailOrdineAccettato"
 import {sendEmailOrdineRifiutato } from "../controllers/sendEmailOrdineRifiutato";
 import { rifiutaOrdini } from "../controllers/rifiutaOrdini";
 import { getTuttiGliOrdiniAccettati } from "../controllers/resocontoOrdiniAccettati";
-import { get } from "http";
+import { getMenuBevande } from "../controllers/getMenuDrink";
+import { getMenuCibo } from "../controllers/getMenuFood";
+import { modificaProdotto } from "../controllers/modificaProdotto";
+import { deleteProdotto } from "../controllers/eliminaProdotto";
+import { aggiungiProdotto } from "../controllers/aggiungiProdotto";
+import {getOrdineById} from "../controllers/getProdottoById";
 
 dotenv.config();
 
@@ -34,6 +39,15 @@ app.post("/ordini/email-accettata", sendOrderAcceptedEmail);
 app.post("/ordini/email-rifiutata", sendEmailOrdineRifiutato);
 app.post("/rifiutaOrdine", rifiutaOrdini);
 app.get("/resocontoOrdiniAccettati",getTuttiGliOrdiniAccettati);
+app.get("/menuBevande", getMenuBevande);
+app.get("/menuCibo", getMenuCibo);
+app.put('/cibo/:id', modificaProdotto);
+app.put('/bevande/:id', modificaProdotto);
+app.delete('/cibo/:id', deleteProdotto);
+app.delete('/bevande/:id', deleteProdotto);
+app.post('/:tipo', aggiungiProdotto); 
+app.get("/ordini/id/:ordineId", getOrdineById);
+
 app.listen(PORT, () => {
   console.log(`Server in ascolto sulla porta ${PORT}`);
 });

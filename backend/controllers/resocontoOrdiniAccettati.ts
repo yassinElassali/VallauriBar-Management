@@ -4,9 +4,9 @@ import client from "../database/mongo";
 const DB_NAME = "VallauriBar";
 
 export const getTuttiGliOrdiniAccettati: RequestHandler = async (req, res): Promise<void> => {
+  const conn = await client().connect();
   try {
-    await client.connect();
-    const db = client.db(DB_NAME);
+    const db = conn.db(DB_NAME);
     const ordiniCollection = db.collection("ordiniAccettati");
 
     const ordini = await ordiniCollection.find().toArray();
@@ -22,6 +22,6 @@ export const getTuttiGliOrdiniAccettati: RequestHandler = async (req, res): Prom
     console.error("Errore nel recupero degli ordini:", err);
     res.status(500).send({ message: "Errore del server" });
   } finally {
-    await client.close();
+    await conn.close();
   }
 };

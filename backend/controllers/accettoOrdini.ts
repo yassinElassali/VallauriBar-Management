@@ -15,9 +15,9 @@ export const addOrdiniAccettati: RequestHandler = async (req, res) => {
     return;
   }
 
+  const conn = await client().connect();
   try {
-    await client.connect();
-    const db = client.db(DB_NAME);
+    const db = conn.db(DB_NAME);
     const ordiniAccettati = db.collection("ordiniAccettati");
     const ordiniInAttesa = db.collection("ordiniInAttesa");
 
@@ -37,6 +37,6 @@ export const addOrdiniAccettati: RequestHandler = async (req, res) => {
     console.error("Errore nel salvataggio o nella rimozione dell'ordine:", err);
     res.status(500).json({ message: "Errore del server" });
   } finally {
-    await client.close();
+    await conn.close();
   }
 };

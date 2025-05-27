@@ -24,64 +24,76 @@ export class ResocontoOrdiniComponent implements OnInit {
   }
 
   stampaFattura(ordine: any) {
-    const doc = new jsPDF();
+  const doc = new jsPDF();
 
-    const prodotti = ordine.prodotti || [];
-    const data = prodotti.map((p: any) => {
-      const prezzo = typeof p.prezzo === 'number' ? p.prezzo : parseFloat(p.prezzo) || 0;
-      const totale = prezzo * p.quantita;
-      return [
-        p.nome,
-        `${p.quantita}x`,
-        `${prezzo.toFixed(2)} €`,
-        `${totale.toFixed(2)} €`
-      ];
-    });
+  const prodotti = ordine.prodotti || [];
+  const data = prodotti.map((p: any) => {
+    const prezzo = typeof p.prezzo === 'number' ? p.prezzo : parseFloat(p.prezzo) || 0;
+    const totale = prezzo * p.quantita;
+    return [
+      p.nome,
+      `${p.quantita}x`,
+      `${prezzo.toFixed(2)} €`,
+      `${totale.toFixed(2)} €`
+    ];
+  });
 
-    const totaleOrdine = prodotti.reduce((sum: number, p: any) => {
-      const prezzo = typeof p.prezzo === 'number' ? p.prezzo : parseFloat(p.prezzo) || 0;
-      return sum + (prezzo * p.quantita);
-    }, 0);
+  const totaleOrdine = prodotti.reduce((sum: number, p: any) => {
+    const prezzo = typeof p.prezzo === 'number' ? p.prezzo : parseFloat(p.prezzo) || 0;
+    return sum + (prezzo * p.quantita);
+  }, 0);
 
-    // Caricamento del logo
-    const logoUrl = 'assets/Logo1.png'; 
-    const logoWidth = 40;  // Larghezza del logo
-    const logoHeight = 40; // Altezza del logo
+  // Logo
+  const logoUrl = 'assets/Logo1.png';
+  const logoWidth = 40;
+  const logoHeight = 40;
+  const pageWidth = doc.internal.pageSize.width;
+  const logoX = pageWidth - logoWidth - 15;
 
-    // Calcola la posizione X per centrare il logo a destra
-    const pageWidth = doc.internal.pageSize.width; // Larghezza della pagina
-    const logoX = pageWidth - logoWidth - 15; // Posizione X del logo (10mm da destra)
+  doc.addImage(logoUrl, 'PNG', logoX, 10, logoWidth, logoHeight);
 
-    // Aggiungi il logo al documento
-    doc.addImage(logoUrl, 'PNG', logoX, 10, logoWidth, logoHeight); // 10 è la posizione Y
+  // Intestazione
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(18);
+  doc.text("Fattura Ordine", 15, 20);
 
-    doc.setFontSize(16);
-    doc.text("Fattura Ordine", 15, 20);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(12);
+  doc.text(`Email cliente: ${ordine.email}`, 15, 36);
+  doc.text(`Data ordine: ${new Date(ordine.creatoIl).toLocaleString()}`, 15, 42);
 
-    doc.setFontSize(12);
-    doc.text(`Email: ${ordine.email}`, 15, 36);
-    doc.text(`Data Ordine: ${new Date(ordine.creatoIl).toLocaleString()}`, 15, 42);
+  // Tabella
+  autoTable(doc, {
+    head: [['Prodotto', 'Quantità', 'Prezzo Unitario', 'Totale']],
+    body: data,
+    startY: 55,
+    headStyles: {
+      fillColor: [74, 144, 226], // Blu #4a90e2
+      textColor: 255,
+      halign: 'center'
+    },
+    bodyStyles: {
+      halign: 'center'
+    },
+    margin: { left: 15, right: 15 }
+  });
 
-    // Ora autoTable dovrebbe essere correttamente riconosciuto
-    autoTable(doc, {
-      head: [['Prodotto', 'Quantità', 'Prezzo Unitario', 'Totale']],
-      body: data,
-      startY: 50
-    });
+  // Totale ordine
+  const finalY = (doc as any).lastAutoTable?.finalY || 70;
+  doc.setFontSize(14);
+  doc.setFont('helvetica', 'bold');
+  doc.text(`Totale: ${totaleOrdine.toFixed(2)} €`, 15, finalY + 15);
 
-    const finalY = (doc as any).lastAutoTable?.finalY || 60;
-
-    doc.setFontSize(14);
-    doc.text(`Totale: ${totaleOrdine.toFixed(2)} €`, 15, finalY + 10);
-
-    const blob = doc.output('blob');
-    const url = URL.createObjectURL(blob);
-    const win = window.open(url);
-    if (win) {
-      win.onload = () => {
-        win.focus();
-        win.print();
-      };
-    }
+  // Stampa
+  const blob = doc.output('blob');
+  const url = URL.createObjectURL(blob);
+  const win = window.open(url);
+  if (win) {
+    win.onload = () => {
+      win.focus();
+      win.print();
+    };
   }
+}
+
 }

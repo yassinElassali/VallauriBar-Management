@@ -15,9 +15,10 @@ export const rifiutaOrdini: RequestHandler = async (req, res) => {
     return;
   }
 
+  const conn = await client().connect();
   try {
-    await client.connect();
-    const db = client.db(DB_NAME);
+    
+    const db = conn.db(DB_NAME);
     const ordiniInAttesa = db.collection("ordiniInAttesa");
 
     await ordiniInAttesa.deleteOne({ codiceOrdine: ordineId });
@@ -27,6 +28,6 @@ export const rifiutaOrdini: RequestHandler = async (req, res) => {
     console.error("Errore nella rimozione dell'ordine:", err);
     res.status(500).json({ message: "Errore del server" });
   } finally {
-    await client.close();
+    await conn.close();
   }
 };

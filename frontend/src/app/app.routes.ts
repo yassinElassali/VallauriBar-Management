@@ -5,6 +5,8 @@ import { GestisciOrdiniAttesaComponent } from './pages/gestisci-ordini-attesa/ge
 import {DashboardComponent} from './pages/dashboard/dashboard.component';
 import { GestioneMenuComponent } from './pages/gestione-menu/gestione-menu.component';
 import { ResocontoOrdiniComponent } from './pages/resoconto-ordini/resoconto-ordini.component';
+import { CercaOrdiniComponent } from './pages/cerca-ordini/cerca-ordini.component';
+
 export const routes: Routes = [
     {
         path: '',
@@ -29,5 +31,9 @@ export const routes: Routes = [
     {
         path: "resocontoOrdiniAccettati",
         component:ResocontoOrdiniComponent
+    },
+    {
+        path:"cercaOrdine",
+        component: CercaOrdiniComponent
     }
 ];

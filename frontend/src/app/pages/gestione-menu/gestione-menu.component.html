@@ -1,1 +1,90 @@
-<p>gestione-menu works!</p>
+<div class="menu-container">
+  <div class="tabs">
+    <button [class.active]="activeTab === 'cibo'" (click)="switchTab('cibo')">Cibo</button>
+    <button [class.active]="activeTab === 'bevande'" (click)="switchTab('bevande')">Bevande</button>
+    <button [class.active]="activeTab === 'aggiungi'" (click)="switchTab('aggiungi')">Aggiungi Prodotto</button>
+  </div>
+
+  <div *ngIf="activeTab === 'cibo'" class="menu-section">
+    <h2>Menu Cibo</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Prezzo</th>
+          <th>Azioni</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prodotto of menuCibo">
+          <td>{{ prodotto.nome }}</td>
+          <td>{{ prodotto.prezzo }} €</td>
+          <td>
+            <button (click)="apriPopup(prodotto, 'cibo')">Modifica</button>
+            <button (click)="eliminaProdotto(prodotto._id, 'cibo')">Elimina</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="activeTab === 'bevande'" class="menu-section">
+    <h2>Menu Bevande</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Prezzo</th>
+          <th>Azioni</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prodotto of menuBevande">
+          <td>{{ prodotto.nome }}</td>
+          <td>{{ prodotto.prezzo }} €</td>
+          <td>
+            <button (click)="apriPopup(prodotto, 'bevande')">Modifica</button>
+            <button (click)="eliminaProdotto(prodotto._id, 'bevande')">Elimina</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="activeTab === 'aggiungi'" class="menu-section">
+    <h2>Aggiungi Prodotto</h2>
+    <form (ngSubmit)="aggiungiProdotto()" #formProdotto="ngForm">
+      <label>Tipo:</label>
+      <select [(ngModel)]="nuovoProdotto.tipo" name="tipo" required>
+        <option value="cibo">Cibo</option>
+        <option value="bevande">Bevande</option>
+      </select>
+
+      <label>Nome:</label>
+      <input type="text" [(ngModel)]="nuovoProdotto.nome" name="nome" required />
+
+      <label>Prezzo (€):</label>
+      <input type="number" step="0.1" [(ngModel)]="nuovoProdotto.prezzo" name="prezzo" required min="0" />
+
+      <button type="submit" [disabled]="formProdotto.invalid">Aggiungi</button>
+    </form>
+  </div>
+
+  <!-- POPUP MODIFICA -->
+  <div class="popup-overlay" *ngIf="showPopup">
+    <div class="popup-content">
+      <h3>Modifica Prodotto</h3>
+
+      <label>Nome:</label>
+      <input type="text" [(ngModel)]="prodottoSelezionato.nome" />
+
+      <label>Prezzo (€):</label>
+      <input type="number" step="0.1" [(ngModel)]="prodottoSelezionato.prezzo" />
+
+      <div class="popup-buttons">
+        <button (click)="salvaModifiche()">Salva</button>
+        <button class="cancel" (click)="chiudiPopup()">Annulla</button>
+      </div>
+    </div>
+  </div>
+</div>
