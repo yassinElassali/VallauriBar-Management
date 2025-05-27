@@ -1,6 +1,8 @@
 import nodemailer from 'nodemailer';
 import { Request, Response } from 'express';
 import dotenv from 'dotenv';
+import QRCode from 'qrcode';
+
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
@@ -13,7 +15,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const sendOrderAcceptedEmail = (req: Request, res: Response): void => {
+export const sendOrderAcceptedEmail = async (req: Request, res: Response): Promise<void> => {
   const { email, codiceOrdine, cartItems } = req.body;
 
   if (!email || !codiceOrdine || !Array.isArray(cartItems) || cartItems.length === 0) {
@@ -22,7 +24,16 @@ export const sendOrderAcceptedEmail = (req: Request, res: Response): void => {
     return;
   }
 
-  // Creare una lista dei prodotti acquistati
+  // Genera QR code come buffer immagine PNG
+  let qrCodeBuffer;
+  try {
+    qrCodeBuffer = await QRCode.toBuffer(codiceOrdine);
+  } catch (err) {
+    console.error('Errore nella generazione del QR code:', err);
+    res.status(500).json({ message: "Errore nella generazione del QR code" });
+    return;
+  }
+
   const productsList = cartItems.map(item => `
     <tr>
       <td style="padding: 8px; border-bottom: 1px solid #ddd;">${item.nome}</td>
@@ -31,8 +42,6 @@ export const sendOrderAcceptedEmail = (req: Request, res: Response): void => {
     </tr>
   `).join('');
 
-  // Corpo dell'email
-  console.log('Invio email di conferma ordine accettato a:', email);
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: email,
@@ -56,12 +65,22 @@ export const sendOrderAcceptedEmail = (req: Request, res: Response): void => {
             </tbody>
           </table>
           <p style="color: #333333; font-size: 18px; margin-top: 20px; text-align: center;">Codice per il ritiro: <strong>${codiceOrdine}</strong></p>
+          <div style="text-align: center; margin-top: 20px;">
+            <p style="font-size: 16px;">Scansiona questo QR code al momento del ritiro:</p>
+            <img src="cid:qrCode" alt="QR Code" style="margin-top: 10px; width: 150px; height: 150px;" />
+          </div>
           <p style="margin-top: 30px; font-size: 12px; color: #7f8c8d; text-align: center;">Grazie per aver ordinato da Vallauri Bar! Il tuo ordine sarà pronto presto per il ritiro.</p>
         </div>
       </div>
-    `
+    `,
+    attachments: [
+      {
+        filename: 'qrcode.png',
+        content: qrCodeBuffer,
+        cid: 'qrCode' 
+      }
+    ]
   };
-  
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {

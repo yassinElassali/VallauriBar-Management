@@ -3,25 +3,19 @@ import client from "../database/mongo";
 
 const DB_NAME = "VallauriBar";
 
-export const getOrdiniAttesa: RequestHandler = async (req, res): Promise<void> => {
-  const conn = await client().connect();
+export const getOrdiniAttesa: RequestHandler = async (req, res) => {
   try {
+    const conn = await client().connect();
     const db = conn.db(DB_NAME);
-    const carrelloCollection = db.collection("OrdiniAccettati");
+    const ordiniInAttesaCollection = db.collection("ordiniInAttesa");
 
-    const result = await carrelloCollection.find().toArray();
-    console.log("ordini trovati:", result);
-
-    if (result.length === 0) {
-      res.status(404).send({ message: "Carrello non trovato" });
-      return;
-    }
+    const result = await ordiniInAttesaCollection.find().toArray();
+    console.log("Ordini in attesa trovati:", result);
 
     res.status(200).send(result);
+    await conn.close();
   } catch (err) {
     console.error("Errore nel recupero degli ordini:", err);
     res.status(500).send({ message: "Errore del server" });
-  } finally {
-    await conn.close();
   }
 };
