@@ -95,3 +95,35 @@
     transform: translateY(0);
   }
 }
+
+
+.scanner-wrapper {
+  background-color: #f8faff;
+  padding: 15px;
+  border-radius: 12px;
+  border: 2px solid #4a90e2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  margin-bottom: 25px;
+  animation: fadeInUp 0.5s ease;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+}
+
+.scanner-wrapper h3 {
+  color: #4a90e2;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+zxing-scanner {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  height: 200px;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid #dce6f1;
+}

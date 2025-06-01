@@ -1,5 +1,14 @@
 <div class="search-container">
   <h2>Cerca Ordine</h2>
+
+  <!-- Scanner QR Code -->
+  <zxing-scanner
+    [formats]="formatsEnabled"
+    (scanSuccess)="onCodeResult($event)"
+    class="scanner">
+  </zxing-scanner>
+
+  <!-- Input manuale -->
   <input
     type="text"
     placeholder="Inserisci ordineId (es. ORDKEK8H3BX)..."
@@ -8,19 +17,20 @@
   />
   <button (click)="cercaOrdine()" class="search-button">Cerca</button>
 
+  <!-- Dettagli ordine -->
   <div *ngIf="ordine" class="results ordine-card">
-  <h3>Dettagli Ordine</h3>
-  <p><strong>ID Ordine:</strong> {{ ordine.ordineId }}</p>
-  <p><strong>Stato:</strong> {{ ordine.stato }}</p>
-  <p><strong>Data:</strong> {{ ordine.creatoIl | date:'short' }}</p>
-  <p><strong>Prodotti:</strong></p>
-  <ul>
-    <li *ngFor="let prodotto of ordine.prodotti">
-      • <strong>{{ prodotto.nome }}</strong> <span class="qty">x{{ prodotto.quantita }}</span>
-    </li>
-  </ul>
-</div>
+    <h3>Dettagli Ordine</h3>
+    <p><strong>ID Ordine:</strong> {{ ordine.ordineId }}</p>
+    <p><strong>Stato:</strong> {{ ordine.stato }}</p>
+    <p><strong>Data:</strong> {{ ordine.creatoIl | date:'short' }}</p>
+    <p><strong>Prodotti:</strong></p>
+    <ul>
+      <li *ngFor="let prodotto of ordine.prodotti">
+        • <strong>{{ prodotto.nome }}</strong> <span class="qty">x{{ prodotto.quantita }}</span>
+      </li>
+    </ul>
+  </div>
 
-
+  <!-- Nessun risultato -->
   <div *ngIf="noResults" class="no-results">Ordine non trovato.</div>
 </div>

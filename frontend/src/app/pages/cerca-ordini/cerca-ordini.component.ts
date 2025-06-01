@@ -2,10 +2,13 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { BarcodeFormat } from '@zxing/library';
+
 @Component({
   selector: 'app-cerca-ordini',
-  imports: [CommonModule, FormsModule],
   standalone: true,
+  imports: [CommonModule, FormsModule, ZXingScannerModule],
   templateUrl: './cerca-ordini.component.html',
   styleUrls: ['./cerca-ordini.component.css']
 })
@@ -13,6 +16,8 @@ export class CercaOrdiniComponent {
   ordineId: string = '';
   ordine: any = null;
   noResults: boolean = false;
+
+  formatsEnabled = [BarcodeFormat.QR_CODE];
 
   constructor(private http: HttpClient) {}
 
@@ -29,5 +34,10 @@ export class CercaOrdiniComponent {
         this.noResults = true;
       }
     });
+  }
+
+  onCodeResult(result: string) {
+    this.ordineId = result;
+    this.cercaOrdine();
   }
 }
