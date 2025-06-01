@@ -42,6 +42,9 @@ export const sendOrderAcceptedEmail = async (req: Request, res: Response): Promi
     </tr>
   `).join('');
 
+  // Calcola il totale
+  const totalPrice = cartItems.reduce((total, item) => total + item.prezzo * item.quantita, 0).toFixed(2);
+
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: email,
@@ -62,6 +65,10 @@ export const sendOrderAcceptedEmail = async (req: Request, res: Response): Promi
             </thead>
             <tbody>
               ${productsList}
+              <tr>
+                <td colspan="2" style="padding: 8px; text-align: right; font-weight: bold; border-top: 2px solid #333;">Totale:</td>
+                <td style="padding: 8px; font-weight: bold; border-top: 2px solid #333;">€${totalPrice}</td>
+              </tr>
             </tbody>
           </table>
           <p style="color: #333333; font-size: 18px; margin-top: 20px; text-align: center;">Codice per il ritiro: <strong>${codiceOrdine}</strong></p>

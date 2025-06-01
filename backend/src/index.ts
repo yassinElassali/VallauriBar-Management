@@ -13,6 +13,7 @@ import { modificaProdotto } from "../controllers/modificaProdotto";
 import { deleteProdotto } from "../controllers/eliminaProdotto";
 import { aggiungiProdotto } from "../controllers/aggiungiProdotto";
 import {getOrdineById} from "../controllers/getProdottoById";
+import { confermaRitiroOrdine } from "../controllers/ritiroOrdino";
 
 dotenv.config();
 
@@ -47,6 +48,7 @@ app.delete('/cibo/:id', deleteProdotto);
 app.delete('/bevande/:id', deleteProdotto);
 app.post('/:tipo', aggiungiProdotto); 
 app.get("/ordini/id/:ordineId", getOrdineById);
+app.post("/ordini/conferma-ritiro", confermaRitiroOrdine);
 
 app.listen(PORT, () => {
   console.log(`Server in ascolto sulla porta ${PORT}`);

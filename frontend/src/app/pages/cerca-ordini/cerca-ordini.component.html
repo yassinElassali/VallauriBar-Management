@@ -26,9 +26,15 @@
     <p><strong>Prodotti:</strong></p>
     <ul>
       <li *ngFor="let prodotto of ordine.prodotti">
-        • <strong>{{ prodotto.nome }}</strong> <span class="qty">x{{ prodotto.quantita }}</span>
+        • <strong>{{ prodotto.nome }}</strong>
+        <span class="qty">x{{ prodotto.quantita }}</span>
+        <span class="prezzo"> (€{{ prodotto.prezzo.toFixed(2) }})</span>
       </li>
     </ul>
+    <p><strong>Totale:</strong> € {{ totaleOrdine.toFixed(2) }}</p>
+
+    <!-- Bottone conferma ritiro -->
+    <button class="ritiro-button" (click)="confermaRitiro()">Conferma Ritiro</button>
   </div>
 
   <!-- Nessun risultato -->

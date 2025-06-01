@@ -16,6 +16,7 @@ export class CercaOrdiniComponent {
   ordineId: string = '';
   ordine: any = null;
   noResults: boolean = false;
+  totaleOrdine: number = 0;
 
   formatsEnabled = [BarcodeFormat.QR_CODE];
 
@@ -28,10 +29,19 @@ export class CercaOrdiniComponent {
       next: (res) => {
         this.ordine = res;
         this.noResults = !res;
+
+        // Calcolo del totale
+        this.totaleOrdine = 0;
+        if (res && res.prodotti && Array.isArray(res.prodotti)) {
+          this.totaleOrdine = res.prodotti.reduce((sum: number, p: any) => {
+            return sum + (p.prezzo || 0) * (p.quantita || 0);
+          }, 0);
+        }
       },
       error: () => {
         this.ordine = null;
         this.noResults = true;
+        this.totaleOrdine = 0;
       }
     });
   }
@@ -39,5 +49,22 @@ export class CercaOrdiniComponent {
   onCodeResult(result: string) {
     this.ordineId = result;
     this.cercaOrdine();
+  }
+
+  confermaRitiro() {
+    if (!this.ordineId) return;
+
+    this.http.post<any>(
+      `https://organic-fiesta-ww47g9v7p75hgwpg-3000.app.github.dev/ordini/conferma-ritiro`,
+      { ordineId: this.ordineId }
+    ).subscribe({
+      next: () => {
+        alert('Ritiro confermato con successo!');
+
+      },
+      error: () => {
+        alert('Errore durante la conferma del ritiro.');
+      }
+    });
   }
 }
