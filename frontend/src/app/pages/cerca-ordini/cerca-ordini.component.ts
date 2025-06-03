@@ -25,7 +25,7 @@ export class CercaOrdiniComponent {
   cercaOrdine() {
     if (!this.ordineId.trim()) return;
 
-    this.http.get<any>(`https://organic-fiesta-ww47g9v7p75hgwpg-3000.app.github.dev/ordini/id/${this.ordineId}`).subscribe({
+    this.http.get<any>(`http://109.123.240.145:4000/ordini/id/${this.ordineId}`).subscribe({
       next: (res) => {
         this.ordine = res;
         this.noResults = !res;
@@ -55,7 +55,7 @@ export class CercaOrdiniComponent {
     if (!this.ordineId) return;
 
     this.http.post<any>(
-      `https://organic-fiesta-ww47g9v7p75hgwpg-3000.app.github.dev/ordini/conferma-ritiro`,
+      `http://109.123.240.145:4000/ordini/conferma-ritiro`,
       { ordineId: this.ordineId }
     ).subscribe({
       next: () => {

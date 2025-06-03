@@ -26,7 +26,7 @@ export class GestioneMenuComponent implements OnInit {
     prezzo: 0
   };
 
-  private readonly BASE_URL = 'https://organic-fiesta-ww47g9v7p75hgwpg-3000.app.github.dev';
+  private readonly BASE_URL = 'http://109.123.240.145:4000';
 
   constructor(private http: HttpClient) {}
 
