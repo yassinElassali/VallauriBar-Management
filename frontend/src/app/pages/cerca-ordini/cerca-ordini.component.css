@@ -1,145 +1,154 @@
-.search-container {
-  max-width: 600px;
-  margin: 50px auto;
-  background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
 
-.search-input {
-  width: 80%;
-  padding: 10px;
-  border: 2px solid #4a90e2;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  font-size: 16px;
-}
-
-.search-button {
-  background-color: #4a90e2;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.search-button:hover {
-  background-color: #357ab8;
-}
-
-.results {
-  margin-top: 30px;
-  text-align: left;
-}
-
-.results ul {
-  list-style-type: disc;
-  padding-left: 20px;
-}
-
-.no-results {
-  margin-top: 20px;
-  color: #ff4d4d;
-  font-weight: bold;
-}
-.ordine-card {
-  background-color: #f8faff;
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
-  border-left: 6px solid #4a90e2;
-  animation: fadeInUp 0.5s ease;
-}
-
-.ordine-card h3 {
-  color: #4a90e2;
-  margin-bottom: 15px;
-  font-size: 22px;
-}
-
-.ordine-card p {
-  margin: 6px 0;
-  font-size: 16px;
-}
-
-.ordine-card ul {
-  padding-left: 20px;
-  margin-top: 10px;
-}
-
-.ordine-card li {
-  margin-bottom: 6px;
-  font-size: 15px;
-  color: #333;
-}
-
-.ordine-card .qty {
-  color: #4a90e2;
-  font-weight: bold;
-  margin-left: 6px;
-}
-
-/* Optional animation */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
+  .search-container {
+    max-width: 650px;
+    margin: 2rem auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .scanner-wrapper {
+    background-color: #f8faff;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 2px solid #4a90e2;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+    margin-bottom: 1.5rem;
   }
-}
 
+  zxing-scanner {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #dce6f1;
+  }
 
-.scanner-wrapper {
-  background-color: #f8faff;
-  padding: 15px;
-  border-radius: 12px;
-  border: 2px solid #4a90e2;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
-  margin-bottom: 25px;
-  animation: fadeInUp 0.5s ease;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 10px;
-}
+  .search-input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #4a90e2;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
 
-.scanner-wrapper h3 {
-  color: #4a90e2;
-  margin-bottom: 10px;
-  font-size: 18px;
-}
+  .search-button {
+    background-color: #4a90e2;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
 
-zxing-scanner {
-  display: block;
-  width: 100%;
-  max-width: 300px;
-  height: 200px;
-  margin: 0 auto;
-  border-radius: 10px;
-  overflow: hidden;
-  border: 2px solid #dce6f1;
-}
+  .search-button:hover {
+    background-color: #357ab8;
+  }
 
-.conferma-ritiro-button {
-  background-color: #4a90e2;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s;
-  margin-top: 20px;
-}
+  .results {
+    margin-top: 2rem;
+    text-align: left;
+  }
 
-.conferma-ritiro-button:hover {
-  background-color: #357ab8;
-}
+  .ordine-card {
+    background-color: #f8faff;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+    border-left: 6px solid #4a90e2;
+    animation: fadeInUp 0.5s ease;
+  }
+
+  .ordine-card h3 {
+    color: #4a90e2;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+  }
+
+  .ordine-card p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+  }
+
+  .ordine-card ul {
+    padding-left: 1.2rem;
+    margin-top: 0.8rem;
+  }
+
+  .ordine-card li {
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+    color: #333;
+  }
+
+  .ordine-card .qty {
+    color: #4a90e2;
+    font-weight: bold;
+    margin-left: 0.4rem;
+  }
+
+  .ordine-card .prezzo {
+    font-style: italic;
+    margin-left: 0.3rem;
+  }
+
+  .conferma-ritiro-button {
+    background-color: #4a90e2;
+    color: white;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s ease;
+    margin-top: 1.5rem;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  }
+
+  .conferma-ritiro-button:hover {
+    background-color: #357ab8;
+    transform: scale(1.05);
+  }
+
+  .no-results {
+    margin-top: 1.5rem;
+    color: #ff4d4d;
+    font-weight: bold;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .search-container {
+      padding: 1.5rem;
+    }
+
+    .ordine-card {
+      padding: 1rem;
+    }
+
+    .search-button,
+    .conferma-ritiro-button {
+      width: 100%;
+    }
+  }
+

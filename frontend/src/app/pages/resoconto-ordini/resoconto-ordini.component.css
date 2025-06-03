@@ -1,97 +1,154 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  background-color: #f8f8f8;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* CONTAINER CENTRALE */
 .dashboard-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    min-height: 100vh;
-    background-color: #f8f8f8;
-    box-sizing: border-box;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+  background-color: #f8f8f8;
+}
+
+/* BOX CONTENENTE MENU */
+.menu-container {
+  width: 100%;
+  max-width: 1000px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+}
+
+/* SEZIONE SINISTRA */
+.menu-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.menu-left h2 {
+  color: #4a90e2;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* LISTA ORDINI */
+.ordini-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0.5rem;
+  overflow-y: auto;
+}
+
+/* BLOCCO ORDINE */
+.ordine {
+  background: #f0f0f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+/* DATI ORDINE */
+.dati-ordine p,
+.dati-ordine li {
+  margin: 0.4rem 0;
+  font-size: 1rem;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.dati-ordine p strong {
+  color: #4a90e2;
+}
+
+/* LISTA PRODOTTI */
+ul {
+  margin-top: 0.5rem;
+  padding-left: 1.2rem;
+}
+
+/* BOTTONE STAMPA */
+.btn-stampa {
+  margin-top: 1rem;
+  padding: 0.7rem 1.4rem;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-stampa:hover {
+  background-color: #357ac9;
+  transform: scale(1.02);
+}
+
+.btn-stampa:active {
+  transform: scale(0.98);
+}
+
+/* RESPONSIVE MOBILE */
+@media (max-width: 768px) {
   .menu-container {
-    width: 100%;
-    max-width: 1000px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    max-height: 90vh;
+    margin-top: 1rem;
+    width: 95%;
+    max-height: 100%;
   }
-  
+
   .menu-left {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    overflow-y: auto;
+    padding: 1rem;
   }
-  
-  .menu-left h2 {
-    color: #4a90e2;
-    font-size: 2rem;
-    margin-bottom: 1rem;
+
+  .btn-stampa {
+    width: 100%;
     text-align: center;
   }
-  
-  .ordini-list {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 0.5rem;
-    overflow-y: auto;
-  }
-  
+
   .ordine {
-    background: #f0f0f0;
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
   }
-  
-  .dati-ordine p, .dati-ordine li {
-    margin: 0.3rem 0;
-    font-size: 1rem;
+
+  .dati-ordine p,
+  .dati-ordine li {
+    font-size: 0.95rem;
   }
-  
-  ul {
-    margin-top: 0.5rem;
-    padding-left: 1.2rem;
+}
+
+@media (max-width: 480px) {
+  .menu-left h2 {
+    font-size: 1.5rem;
   }
-  
+
   .btn-stampa {
-    margin-top: 1rem;
-    padding: 0.6rem 1.2rem;
-    background-color: #4a90e2;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+    font-size: 0.95rem;
+    padding: 0.6rem 1rem;
   }
-  
-  .btn-stampa:hover {
-    background-color: #357ac9;
-  }
-  
-  @media (max-width: 768px) {
-    .menu-container {
-      margin-top: 1rem;
-      width: 95%;
-      max-height: 100%;
-    }
-  
-    .menu-left {
-      padding: 1rem;
-    }
-  
-    .btn-stampa {
-      width: 100%;
-      text-align: center;
-    }
-  }
-  
+}

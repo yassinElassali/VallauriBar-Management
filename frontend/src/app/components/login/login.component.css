@@ -1,62 +1,83 @@
-body {
+/* RESET & BASE */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  height: 100vh;
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* FISSA IL CENTRO SU TUTTI I DISPOSITIVI */
+body > div {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* CONTAINER CENTRALE */
 .login-box {
   background: white;
-  padding: 40px;
+  padding: 2.5rem;
   border-radius: 20px;
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
   text-align: center;
   animation: fadeIn 0.6s ease;
-  width: 320px;
+  width: 100%;
+  max-width: 360px;
 }
 
+/* TITOLO */
 .login-box h2 {
-  margin-bottom: 25px;
+  font-size: 1.8rem;
   color: #4a90e2;
-  font-size: 24px;
-  font-weight: bold;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
 }
 
+/* INPUT */
 .user-box input {
   background-color: #f1f1f1;
   border: none;
   border-radius: 12px;
-  padding: 15px;
+  padding: 14px;
   width: 100%;
-  font-size: 20px;
+  font-size: 1.4rem;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
   outline: none;
   color: #333;
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.08);
+  letter-spacing: 4px;
 }
 
+/* KEYPAD */
 .keypad {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 14px;
+  margin-bottom: 1.2rem;
 }
 
 .keypad button {
-  padding: 18px 0;
-  font-size: 20px;
+  padding: 1rem 0;
+  font-size: 1.2rem;
   background-color: #4a90e2;
   color: white;
   border: none;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
 }
 
 .keypad button:hover {
@@ -70,27 +91,28 @@ body {
   background-color: #2f6da1;
 }
 
-.actions button {
-  padding: 12px 24px;
-  font-size: 16px;
-  background-color: transparent;
-  border: 2px solid #4a90e2;
+/* AIUTO */
+.help-text {
+  font-size: 0.9rem;
+  margin-top: 1rem;
   color: #4a90e2;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
 }
 
-.actions button:hover {
-  background-color: #4a90e2;
-  color: white;
-  box-shadow: 0 0 10px #4a90e2;
+.help-text a {
+  color: #4a90e2;
+  text-decoration: none;
+  font-weight: 500;
 }
 
+.help-text a:hover {
+  text-decoration: underline;
+}
+
+/* ANIMAZIONE */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(15px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -98,19 +120,10 @@ body {
   }
 }
 
-
-.help-text {
-  text-align: center;
-  font-size: 14px;
-  margin-top: 10px;
-  color: #4a90e2; 
-}
-
-.help-text a {
-  color: #4a90e2;
-  text-decoration: none;
-}
-
-.help-text a:hover {
-  text-decoration: underline;
+/* RESPONSIVE ADATTIVO */
+@media (max-width: 480px) {
+  .login-box {
+    padding: 2rem;
+    margin: auto;
+  }
 }

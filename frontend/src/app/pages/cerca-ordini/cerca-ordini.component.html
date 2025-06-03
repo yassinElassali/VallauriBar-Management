@@ -2,11 +2,13 @@
   <h2>Cerca Ordine</h2>
 
   <!-- Scanner QR Code -->
-  <zxing-scanner
-    [formats]="formatsEnabled"
-    (scanSuccess)="onCodeResult($event)"
-    class="scanner">
-  </zxing-scanner>
+  <div class="scanner-wrapper">
+    <zxing-scanner
+      [formats]="formatsEnabled"
+      (scanSuccess)="onCodeResult($event)"
+      class="scanner">
+    </zxing-scanner>
+  </div>
 
   <!-- Input manuale -->
   <input
@@ -34,7 +36,7 @@
     <p><strong>Totale:</strong> € {{ totaleOrdine.toFixed(2) }}</p>
 
     <!-- Bottone conferma ritiro -->
-    <button class="ritiro-button" (click)="confermaRitiro()">Conferma Ritiro</button>
+    <button class="conferma-ritiro-button" (click)="confermaRitiro()">Conferma Ritiro</button>
   </div>
 
   <!-- Nessun risultato -->

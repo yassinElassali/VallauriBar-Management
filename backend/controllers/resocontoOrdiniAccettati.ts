@@ -7,7 +7,7 @@ export const getTuttiGliOrdiniAccettati: RequestHandler = async (req, res): Prom
   const conn = await client().connect();
   try {
     const db = conn.db(DB_NAME);
-    const ordiniCollection = db.collection("ordiniAccettati");
+    const ordiniCollection = db.collection("ordiniRitirati");
 
     const ordini = await ordiniCollection.find().toArray();
     console.log("Ordini trovati:", ordini);
