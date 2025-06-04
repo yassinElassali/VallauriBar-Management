@@ -18,7 +18,8 @@ export class CercaOrdiniComponent {
   noResults: boolean = false;
   totaleOrdine: number = 0;
   devices: MediaDeviceInfo[] = [];
-  currentDevice: MediaDeviceInfo | null = null;
+  currentDevice: MediaDeviceInfo | undefined = undefined;
+
 
   formatsEnabled = [BarcodeFormat.QR_CODE];
 
