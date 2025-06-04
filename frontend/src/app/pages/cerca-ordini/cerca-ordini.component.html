@@ -1,13 +1,17 @@
 <div class="search-container">
-  <h2>Cerca Ordine</h2>
+  <h2>Ricerca ordini da ritirare</h2>
 
   <!-- Scanner QR Code -->
   <div class="scanner-wrapper">
     <zxing-scanner
-      [formats]="formatsEnabled"
-      (scanSuccess)="onCodeResult($event)"
-      class="scanner">
-    </zxing-scanner>
+  [formats]="formatsEnabled"
+  [device]="currentDevice"
+  (camerasFound)="onCamerasFound($event)"
+  (scanSuccess)="onCodeResult($event)"
+  (permissionResponse)="onPermissionResponse($event)"
+  class="scanner">
+</zxing-scanner>
+
   </div>
 
   <!-- Input manuale -->
@@ -17,7 +21,7 @@
     [(ngModel)]="ordineId"
     class="search-input"
   />
-  <button (click)="cercaOrdine()" class="search-button">Cerca</button>
+  <button (click)="cercaOrdine()" class="search-button">cerca ordine</button>
 
   <!-- Dettagli ordine -->
   <div *ngIf="ordine" class="results ordine-card">

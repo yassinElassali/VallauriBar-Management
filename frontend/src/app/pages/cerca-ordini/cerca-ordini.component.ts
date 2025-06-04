@@ -17,6 +17,8 @@ export class CercaOrdiniComponent {
   ordine: any = null;
   noResults: boolean = false;
   totaleOrdine: number = 0;
+  devices: MediaDeviceInfo[] = [];
+  currentDevice: MediaDeviceInfo | null = null;
 
   formatsEnabled = [BarcodeFormat.QR_CODE];
 
@@ -67,4 +69,17 @@ export class CercaOrdiniComponent {
       }
     });
   }
+
+  onCamerasFound(devices: MediaDeviceInfo[]) {
+  this.devices = devices;
+  if (devices.length > 0) {
+    this.currentDevice = devices[0]; // seleziona la prima cam trovata
+  }
+}
+
+onPermissionResponse(hasPermission: boolean) {
+  if (!hasPermission) {
+    alert('Permesso alla videocamera negato.');
+  }
+}
 }
