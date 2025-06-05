@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 2,
+  "dockerfileLines": [
+    "FROM node:18",
+    "WORKDIR /app",
+    "RUN curl -s https://worldtimeapi.org/api/timezone/Europe/Rome | grep datetime",
+    "COPY . .",
+    "RUN npm install -g @angular/cli",
+    "RUN npm install",
+    "EXPOSE 4200",
+    "CMD [\"ng\", \"serve\", \"--host\", \"0.0.0.0\", \"--disable-host-check\"]"
+  ]
+}

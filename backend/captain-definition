@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 2,
+  "dockerfileLines": [
+    "FROM node:18",
+    "WORKDIR /app",
+    "RUN curl -s https://worldtimeapi.org/api/timezone/Europe/Rome | grep datetime",
+    "COPY . .",   
+    "RUN npm install -g nodemon",
+    "RUN npm install",
+    "CMD [\"npm\", \"start\"]",
+    "EXPOSE 3000"
+  ]
+}
