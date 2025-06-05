@@ -28,7 +28,7 @@ export class CercaOrdiniComponent {
   cercaOrdine() {
     if (!this.ordineId.trim()) return;
 
-    this.http.get<any>(`http://109.123.240.145:4000/ordini/id/${this.ordineId}`).subscribe({
+    this.http.get<any>(`https://management.vallauribar.connectify.it/api/ordini/id/${this.ordineId}`).subscribe({
       next: (res) => {
         this.ordine = res;
         this.noResults = !res;
@@ -58,7 +58,7 @@ export class CercaOrdiniComponent {
     if (!this.ordineId) return;
 
     this.http.post<any>(
-      `http://109.123.240.145:4000/ordini/conferma-ritiro`,
+      `https://management.vallauribar.connectify.it/api/ordini/conferma-ritiro`,
       { ordineId: this.ordineId }
     ).subscribe({
       next: () => {

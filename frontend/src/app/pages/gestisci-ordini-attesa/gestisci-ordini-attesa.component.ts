@@ -52,7 +52,7 @@ export class GestisciOrdiniAttesaComponent implements OnInit, OnDestroy {
   }
 
   getOrders(): void {
-    this.http.get<any[]>('http://109.123.240.145:4000/ordiniInAttesa')
+    this.http.get<any[]>('https://management.vallauribar.connectify.it/api/ordiniInAttesa')
       .subscribe(
         (data) => {
           this.orders = data;
@@ -69,13 +69,13 @@ export class GestisciOrdiniAttesaComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.http.post('http://109.123.240.145:4000/accettaOrdine', {
+    this.http.post('https://management.vallauribar.connectify.it/api/accettaOrdine', {
       email: order.email,
       ordineId: order.codiceOrdine,
       prodotti: order.cartItems
     }).subscribe(
       (response) => {
-        this.http.post('http://109.123.240.145:4000/ordini/email-accettata', {
+        this.http.post('https://management.vallauribar.connectify.it/api/ordini/email-accettata', {
           email: order.email,
           codiceOrdine: order.codiceOrdine,
           cartItems: order.cartItems
@@ -139,7 +139,7 @@ export class GestisciOrdiniAttesaComponent implements OnInit, OnDestroy {
     this.disponibili = this.selectedOrder.cartItems.filter((item: any) => item.disponibile);
     this.nonDisponibili = this.selectedOrder.cartItems.filter((item: any) => !item.disponibile);
   
-    this.http.post('http://109.123.240.145:4000/ordini/email-rifiutata', {
+    this.http.post('https://management.vallauribar.connectify.it/api/ordini/email-rifiutata', {
       email: this.selectedOrder.email,
       codiceOrdine: this.selectedOrder.codiceOrdine,
       disponibili: this.disponibili,
@@ -160,7 +160,7 @@ export class GestisciOrdiniAttesaComponent implements OnInit, OnDestroy {
   ordineRifiutato(): void {
     if (!this.selectedOrder) return;
   
-    this.http.post('http://109.123.240.145:4000/rifiutaOrdine', {
+    this.http.post('https://management.vallauribar.connectify.it/api/rifiutaOrdine', {
       email: this.selectedOrder.email,
       ordineId: this.selectedOrder.codiceOrdine,
       prodotti: [...this.disponibili, ...this.nonDisponibili]

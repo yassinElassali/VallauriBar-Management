@@ -26,7 +26,7 @@ export class GestioneMenuComponent implements OnInit {
     prezzo: 0
   };
 
-  private readonly BASE_URL = 'http://109.123.240.145:4000';
+  private readonly BASE_URL = 'https://management.vallauribar.connectify.it/api';
 
   constructor(private http: HttpClient) {}
 

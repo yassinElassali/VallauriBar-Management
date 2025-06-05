@@ -17,7 +17,7 @@ export class ResocontoOrdiniComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get<any[]>('http://109.123.240.145:4000/resocontoOrdiniAccettati').subscribe({
+    this.http.get<any[]>('https://management.vallauribar.connectify.it/api/resocontoOrdiniAccettati').subscribe({
       next: (data) => this.ordini = data,
       error: (err) => console.error('Errore nel recupero ordini', err)
     });
